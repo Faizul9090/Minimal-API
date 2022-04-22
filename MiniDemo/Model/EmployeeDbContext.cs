@@ -12,10 +12,13 @@ namespace MiniDemo.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var configuration = new ConfigurationBuilder();
-            configuration.SetBasePath(Directory.GetCurrentDirectory());
-            configuration.AddJsonFile("appsrttings.json");
-            configuration.Build();
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsrttings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("AppDb");
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }
