@@ -10,6 +10,12 @@ namespace MiniDemo.Model
 
         public DbSet<Employee> Employees { get; set; }
 
-        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var configuration = new ConfigurationBuilder();
+            configuration.SetBasePath(Directory.GetCurrentDirectory());
+            configuration.AddJsonFile("appsrttings.json");
+            configuration.Build();
+        }
     }
 }
