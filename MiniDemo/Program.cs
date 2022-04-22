@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using MiniDemo.Model;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<EmployeeDbContext>(x => x.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -15,26 +20,26 @@ app.MapGet("/", () => "Hello World!");
 //    };
 //}));
 
-app.MapGet("/employee", (Func<List<Employee>>)(() =>
-    {
-        return new EmployeeCollection().GetEmployees();
-    }
-));
+//app.MapGet("/employee", (Func<List<Employee>>)(() =>
+//    {
+//        return new EmployeeCollection().GetEmployees();
+//    }
+//));
 
-app.MapGet("/employee/{id}", async (http) =>
-{
-    if (!http.Request.RouteValues.TryGetValue("id", out var id))
-    {
-        http.Response.StatusCode = 400;
-        return;
-    }
-    else
-    {
-        await http.Response.WriteAsJsonAsync(new EmployeeCollection()
-                .GetEmployees()
-                .FirstOrDefault(x => x.EmployeeId == (string)id)
-            );
-    }
-});
+//app.MapGet("/employee/{id}", async (http) =>
+//{
+//    if (!http.Request.RouteValues.TryGetValue("id", out var id))
+//    {
+//        http.Response.StatusCode = 400;
+//        return;
+//    }
+//    else
+//    {
+//        await http.Response.WriteAsJsonAsync(new EmployeeCollection()
+//                .GetEmployees()
+//                .FirstOrDefault(x => x.EmployeeId == (string)id)
+//            );
+//    }
+//});
 
 app.Run();
