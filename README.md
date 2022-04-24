@@ -1,4 +1,4 @@
-
+Developing Microservice with ASP.NET Core 6.0
 Installed package:
     1. Microsoft.EntityFrameworkCore (Version 6.0.4)
     2. Microsoft.EntityFrameworkCore.SqlServer (Version 6.0.4)
