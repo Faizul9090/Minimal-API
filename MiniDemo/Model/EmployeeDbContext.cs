@@ -14,7 +14,7 @@ namespace MiniDemo.Model
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsrttings.json")
+                .AddJsonFile("appsettings.json")
                 .Build();
 
             var connectionString = configuration.GetConnectionString("AppDb");
